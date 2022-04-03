@@ -48,31 +48,29 @@ class _ScrollWithListComponentState extends State<ScrollWithListComponent> {
     logic.calculateList(widget.categories);
     return Column(
       children: [
-        Container(
-          child: SizedBox(
-            height: 130,
-            child: PageView(
-                onPageChanged: (index) async {
-                  if (state.listenListScroll.value == false) {
-                    return;
-                  }
-                  state.listenListScroll.value = false;
-                  state.itemPositionsListener.itemPositions
-                      .removeListener(logic.listenFun);
-                  Dbg.log(index);
+        SizedBox(
+          height: 200,
+          child: PageView(
+              onPageChanged: (index) async {
+                if (state.listenListScroll.value == false) {
+                  return;
+                }
+                state.listenListScroll.value = false;
+                state.itemPositionsListener.itemPositions
+                    .removeListener(logic.listenFun);
+                Dbg.log(index);
 
-                  await state.scrollController.scrollTo(
-                      index: state.categoryFirstMap[index][1],
-                      duration: Duration(milliseconds: 500),
-                      curve: Curves.fastLinearToSlowEaseIn);
-                  // await Future.delayed(Duration(milliseconds: 50));
-                  state.listenListScroll.value = true;
-                  state.itemPositionsListener.itemPositions
-                      .addListener(logic.listenFun);
-                },
-                children: widget.categories.map((e) => e.title).toList(),
-                controller: state.pageController),
-          ),
+                await state.scrollController.scrollTo(
+                    index: state.categoryFirstMap[index][1],
+                    duration: Duration(milliseconds: 500),
+                    curve: Curves.fastLinearToSlowEaseIn);
+                // await Future.delayed(Duration(milliseconds: 50));
+                state.listenListScroll.value = true;
+                state.itemPositionsListener.itemPositions
+                    .addListener(logic.listenFun);
+              },
+              children: widget.categories.map((e) => e.title).toList(),
+              controller: state.pageController),
         ),
         Expanded(
           child: Scrollbar(

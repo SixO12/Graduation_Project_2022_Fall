@@ -34,43 +34,43 @@ class _SearchPageComponentState extends State<SearchPageComponent> {
           padding: const EdgeInsets.only(top: 8.0),
           child: SizedBox(
             height: 50,
-            child: Stack(
+            child: Row(
               children: [
-                AnimatedPadding(
-                  duration: Duration(milliseconds: 200),
-                  padding: EdgeInsets.only(
-                      left: 15,
-                      right: 15.0 + (state.showCancel.value ? state.cancelPad * 2 : 0)),
-                  child: Focus(
-                    onFocusChange: (hasFocus) {
-                      if (hasFocus) {
-                        state.showCancel.value = hasFocus;
-                      }
-                      // state.showCancel.value = hasFocus;
-                    },
-                    child: TextField(
-                      onChanged: (s) {
-                        state.searchText.value = s;
+                Expanded(
+                  child: AnimatedPadding(
+                    duration: const Duration(milliseconds: 200),
+                    padding: const EdgeInsets.only(left: 15, right: 15.0),
+                    child: Focus(
+                      onFocusChange: (hasFocus) {
+                        if (hasFocus) {
+                          state.showCancel.value = hasFocus;
+                        }
+                        // state.showCancel.value = hasFocus;
                       },
-                      controller: state.textEditingController,
-                      decoration:  InputDecoration(
-                        errorText: true ? (true ? null : 'Can not be Null') : null,
-                        labelText: 'What Trash?',
-                        focusedBorder:  OutlineInputBorder(
-                          borderSide: BorderSide(color: Config.bottomBarColor),
-                          borderRadius: const BorderRadius.all(Radius.circular(30.0),),
+                      child: TextField(
+                        onChanged: (s) {
+                          state.searchText.value = s;
+                        },
+                        controller: state.textEditingController,
+                        decoration:  InputDecoration(
+                          errorText: true ? (true ? null : 'Can not be Null') : null,
+                          labelText: 'What Trash?',
+                          focusedBorder:  OutlineInputBorder(
+                            borderSide: BorderSide(color: Config.bottomBarColor),
+                            borderRadius: const BorderRadius.all(Radius.circular(30.0),),
+                          ),
+                          border:  OutlineInputBorder(
+                            borderSide: BorderSide(color: Config.bottomBarColor),
+                            borderRadius: const BorderRadius.all(Radius.circular(30.0),),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Config.bottomBarColor),
+                            borderRadius: const BorderRadius.all(Radius.circular(30.0),),
+                          ),
+                          // filled: true,
+                          // hintStyle: new TextStyle(color: Colors.grey[800]),
+                          // hintText: "UserName",
                         ),
-                        border:  OutlineInputBorder(
-                          borderSide: BorderSide(color: Config.bottomBarColor),
-                          borderRadius: const BorderRadius.all(Radius.circular(30.0),),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Config.bottomBarColor),
-                          borderRadius: const BorderRadius.all(Radius.circular(30.0),),
-                        ),
-                        // filled: true,
-                        // hintStyle: new TextStyle(color: Colors.grey[800]),
-                        // hintText: "UserName",
                       ),
                     ),
                   ),
@@ -82,17 +82,16 @@ class _SearchPageComponentState extends State<SearchPageComponent> {
                       children: [
                         GestureDetector(
                           onTap: () {
+
                             state.showCancel.value = false;
                             FocusScope.of(context).requestFocus(FocusNode());
                             Navigator.of(context).push(MaterialPageRoute(builder: (context) => CardStackedListPage(arguments: {
                               "needName" : state.textEditingController.text,
-                              "imageUrl" : 'assets/9k.png',
-
                             },),fullscreenDialog: true),);
                           },
                           child: SizedBox(
                               width: state.showCancel.value ? state.cancelPad : 0,
-                              child: const Text('Search',style: TextStyle(color: Colors.blue),)),
+                              child: const Text('Search',style: TextStyle(color: Colors.blue,fontSize: 13),)),
                         ),
                         GestureDetector(
                           onTap: () {
@@ -103,25 +102,11 @@ class _SearchPageComponentState extends State<SearchPageComponent> {
                           },
                           child: SizedBox(
                               width: state.showCancel.value ? state.cancelPad : 0,
-                              child: const Text('Cancel')),
+                              child: const Text('Cancel',style: TextStyle(fontSize: 13),)),
                         )
                       ],
-                    )),
-                // AnimatedClipRect(
-                //   open: state.showCancel.value,
-                //   horizontalAnimation: true,
-                //   verticalAnimation: false,
-                //   alignment: Alignment.center,
-                //   duration: const Duration(milliseconds: 1000),
-                //   curve: Curves.bounceOut,
-                //   reverseCurve: Curves.bounceIn,
-                //   child: Container(
-                //     color: Colors.lightGreenAccent,
-                //     padding: const EdgeInsets.all(8),
-                //     child: const Text(
-                //         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'),
-                //   ),
-                // ),
+                    ),
+                ),
               ],
             ),
           ),
@@ -130,7 +115,7 @@ class _SearchPageComponentState extends State<SearchPageComponent> {
     );
   }
 
-  var colors = [Colors.red, Colors.green, Colors.blue, Colors.yellow];
+  var colors = [Colors.green, Colors.black, Colors.blue, Colors.red];
   var radius = 20.0;
 
   Future onItemTap(context, GarbageDataItems data) async {
@@ -192,7 +177,7 @@ class _SearchPageComponentState extends State<SearchPageComponent> {
                   padding: const EdgeInsets.all(14.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
-                    children: [Icon(Icons.ios_share), Text('Share')],
+                    children: const [Icon(Icons.ios_share), Text('Share')],
                   ),
                 ),
               )
@@ -209,6 +194,7 @@ class _SearchPageComponentState extends State<SearchPageComponent> {
       child: Column(
         children: [
           _buildText(),
+          const SizedBox(height: 20,),
           Expanded(
             child: Obx(() {
               var builders = [
@@ -226,10 +212,10 @@ class _SearchPageComponentState extends State<SearchPageComponent> {
                       itemBuilder: (c, i) {
                         return ListTile(
                           onTap: () {
+
                             FocusScope.of(context).requestFocus(FocusNode());
                             Navigator.of(context).push(MaterialPageRoute(builder: (context) => CardStackedListPage(arguments: {
                               "needName" : garbageData[i].name,
-                              "imageUrl" : 'assets/9k.png',
                             },),fullscreenDialog: true),);
 
                             // onItemTap(context, garbageData[i]);
@@ -241,25 +227,66 @@ class _SearchPageComponentState extends State<SearchPageComponent> {
                     () => ScrollWithListComponent(
                   categories: List.generate(
                     garbage.data.length,
-                        (index0) => CategoryScrollBinder(
-                      title: CategoryCard(
-                        color: colors[index0 % colors.length],
-                        title: garbage.data[index0].name,
-                      ),
-                      items: List.generate(
-                        garbage.data[index0].items.length,
-                            (index1) => ListTile(
-                          onTap:(){
-                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => CardStackedListPage(arguments: {
-                              "needName" : garbage.data[index0].items[index1].name,
-                              "imageUrl" : 'assets/9k.png',
-                            },),fullscreenDialog: true),);
 
-                          },
-                          title: Text('${garbage.data[index0].items[index1].name}', style: TextStyle(color: colors[index0 % colors.length],),),
+                        (index0){
+
+                           String _title = garbage.data[index0].name;
+                           Color _color = colors[index0 % colors.length];
+                           String _describe1 = garbage.data[index0].description;
+                           String _describe2 = garbage.data[index0].description1;
+                           String _describe3 = garbage.data[index0].description2;
+                           String _describe4 = garbage.data[index0].description3;
+
+                      return CategoryScrollBinder(
+                        title: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: _color,
+                          ),
+                          margin: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+                          padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                          child:Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(_title,style: const TextStyle(color: Colors.white,fontSize: 18),),
+                                  const SizedBox(height: 4,),
+                                  Text(_describe1,style: const TextStyle(color: Colors.white,fontSize: 12),),
+                                ],
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(_describe2,style: const TextStyle(color: Colors.white,fontSize: 12),),
+                                  const SizedBox(height: 3,),
+                                  Text(_describe3,style: const TextStyle(color: Colors.white,fontSize: 12),),
+                                  const SizedBox(height: 3,),
+                                  Text(_describe4,style: const TextStyle(color: Colors.white,fontSize: 12),),
+                                ],
+                              ),
+                              const SizedBox(height: 4,),
+                              // const Expanded(child: SizedBox(),),
+                            ],
+                          ),
                         ),
-                      ),
-                    ),
+
+                        items: List.generate(
+                          garbage.data[index0].items.length,
+                              (index1) => ListTile(
+                            onTap:(){
+
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => CardStackedListPage(arguments: {
+                                "needName" : garbage.data[index0].items[index1].name,
+                              },),fullscreenDialog: true),);
+                            },
+                            title: Text(garbage.data[index0].items[index1].name, style: TextStyle(color: colors[index0 % colors.length],),),
+                          ),
+                        ),
+                      );
+                        },
                   ),
                 ),
               ];

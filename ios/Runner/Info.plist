@@ -44,6 +44,8 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>NSCameraUsageDescription</key>
-	<string>yep</string>
+	<string>App needs to use your camera to take photos</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>App needs to use your photo album to store pictures</string>
 </dict>
 </plist>

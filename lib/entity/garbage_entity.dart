@@ -9,6 +9,9 @@ class GarbageData with JsonConvert<GarbageData> {
 	String name;
 	String alias;
 	String description;
+	String description1;
+	String description2;
+	String description3;
 	String tips;
 	List<GarbageDataItems> items;
 }

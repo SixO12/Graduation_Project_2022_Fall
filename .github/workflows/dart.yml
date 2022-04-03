@@ -20,3 +20,6 @@ jobs:
     # - run: flutter config --enable-web
     - run: flutter pub get
     - run: flutter build apk
+      with: 
+       name: Build
+       path: build/app/outputs/flutter-apk/

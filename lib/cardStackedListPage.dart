@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rubbish/cardStackedSharePage.dart';
 import 'package:flutter_rubbish/entity/garbage_entity.dart';
 import 'package:stacked_listview/stacked_listview.dart';
 
@@ -15,16 +16,15 @@ class _CardStackedListPageState extends State<CardStackedListPage> {
 
   int _index = 0;
   bool _click = false;
-  var colors = [Colors.red, Colors.green, Colors.blue, Colors.yellow];
+  var colors = [Colors.red, Colors.green, Colors.blue, Colors.orangeAccent];
   String _needName = "";
 
-  String _imageUrl = "";
+  String _imageUrl = "assets/foodwaste.png";
   List<GarbageDataItems> _garbageDataInside = [];
   @override
   void initState() {
     super.initState();
     _needName = widget.arguments["needName"];
-    _imageUrl = widget.arguments["imageUrl"];
     _check();
 
   }
@@ -37,6 +37,7 @@ class _CardStackedListPageState extends State<CardStackedListPage> {
         }
       });
     });
+
   }
 
   @override
@@ -128,6 +129,20 @@ class _CardStackedListPageState extends State<CardStackedListPage> {
                             setState(() {
                               _click = !_click;
                               _index = index;
+
+                              String _categoryName = _garbageDataInside.isNotEmpty ? garbage.data[int.tryParse(_garbageDataInside[_index].category) ?? 0].name : "" ;
+                              print(_categoryName);
+                              if(_categoryName == "Food waste"){
+                                _imageUrl = "assets/foodwaste.png";
+                              }else if(_categoryName == "Other garbage"){
+                                _imageUrl = "assets/othergarbage.png";
+                              }else if(_categoryName == "Recyclable waste"){
+                                _imageUrl = "assets/recyclable.png";
+                              }else if(_categoryName == "Hazardous waste"){
+                                _imageUrl = "assets/hazardouswaste.png";
+                              }else{
+                                _imageUrl = "assets/foodwaste.png";
+                              }
                             });
                           },
                         );
@@ -178,7 +193,7 @@ class _CardStackedListPageState extends State<CardStackedListPage> {
                              Expanded(
                               child: Container(
                                 child: Image.asset(_imageUrl,fit: BoxFit.contain,),
-                                padding: EdgeInsets.all(70),
+                                padding: const EdgeInsets.all(70),
                               )
                             ),
                             Container(
@@ -192,7 +207,52 @@ class _CardStackedListPageState extends State<CardStackedListPage> {
                                       Text("Share",style: TextStyle(fontSize: 16,color: Colors.black,fontWeight: FontWeight.w600),),
                                     ],
                                   ),
+                                  behavior: HitTestBehavior.opaque,
                                   onTap: (){
+                                    showDialog(
+                                      context: context,
+                                        barrierDismissible : false,
+                                      builder: (BuildContext context) {
+                                        return Container(
+                                          color:const Color.fromRGBO(0, 0, 0, 0.7),
+                                          alignment: Alignment.center,
+                                          padding: const EdgeInsets.fromLTRB(10, 20, 10, 20),
+                                          child: Column(
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  const SizedBox(width: 20,),
+                                                  const Icon(Icons.close,color: Colors.transparent,size: 30,),
+                                                  Expanded(
+                                                    child: Container(
+                                                      child: const Text("图片分享保存",style: TextStyle(fontSize: 16,color: Colors.white,fontWeight: FontWeight.w600),),
+                                                      alignment: Alignment.center,
+                                                    ),
+                                                  ),
+                                                  GestureDetector(
+                                                    child: const Icon(Icons.close,color: Colors.white,size: 30,),
+                                                    behavior: HitTestBehavior.opaque,
+                                                    onTap: (){
+                                                      Navigator.pop(context);
+                                                    },
+                                                  ),
+                                                  const SizedBox(width: 20,),
+                                                ],
+                                              ),
+                                              CardStackedSharePage(
+                                                arguments: {
+                                                  "color" : colors[int.tryParse(_garbageDataInside[_index].category) ?? 0 % colors.length],
+                                                  "name" : (_garbageDataInside.isNotEmpty ? _garbageDataInside[_index].name : ""),
+                                                  "categoryName" : (_garbageDataInside.isNotEmpty ? garbage.data[int.tryParse(_garbageDataInside[_index].category) ?? 0].name : ""),
+                                                  "categoryDescription" : (_garbageDataInside.isNotEmpty ?  garbage.data[int.tryParse(_garbageDataInside[_index].category) ?? 0].description : ""),
+                                                  "imageUrl" : _imageUrl,
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      },
+                                    );
 
                                   },
                                 )
@@ -211,7 +271,7 @@ class _CardStackedListPageState extends State<CardStackedListPage> {
                 ),
               ) :
                   Container(
-                    child: Text("No matching items at this time",style: TextStyle(fontSize: 20,color: Colors.white,fontWeight: FontWeight.w600),),
+                    child: const Text("No matching items at this time",style: TextStyle(fontSize: 20,color: Colors.white,fontWeight: FontWeight.w600),),
                     alignment: Alignment.center,
                   )
             ],

@@ -354,7 +354,6 @@ class _CameraComponentState extends State<CameraComponent>
                             print(_translate[results[maxIndex]]);
                             Navigator.of(context).push(MaterialPageRoute(builder: (context) => CardStackedListPage(arguments: {
                               "needName" : _translate[results[maxIndex]],
-                              "imageUrl" : 'assets/9k.png',
                             },),fullscreenDialog: true),);
                           });
                           _animationController.reverse();

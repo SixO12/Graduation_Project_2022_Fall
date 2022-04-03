@@ -26,6 +26,15 @@ garbageDataFromJson(GarbageData data, Map<String, dynamic> json) {
 	if (json['description'] != null) {
 		data.description = json['description'].toString();
 	}
+	if (json['description'] != null) {
+		data.description1 = json['description1'].toString();
+	}
+	if (json['description'] != null) {
+		data.description2 = json['description2'].toString();
+	}
+	if (json['description'] != null) {
+		data.description3 = json['description3'].toString();
+	}
 	if (json['tips'] != null) {
 		data.tips = json['tips'].toString();
 	}
@@ -41,6 +50,9 @@ Map<String, dynamic> garbageDataToJson(GarbageData entity) {
 	data['name'] = entity.name;
 	data['alias'] = entity.alias;
 	data['description'] = entity.description;
+	data['description1'] = entity.description1;
+	data['description2'] = entity.description2;
+	data['description3'] = entity.description3;
 	data['tips'] = entity.tips;
 	data['items'] =  entity.items?.map((v) => v.toJson())?.toList();
 	return data;

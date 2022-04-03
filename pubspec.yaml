@@ -43,12 +43,12 @@ dependencies:
 #  share: ^2.0.4
   dio: ^4.0.4
   dart_ipify: ^1.1.1
-  camera: ^0.8.0
+  camera: ^0.9.4+18
   get: ^4.6.1
   #  lan_scanner: ^2.0.1
   network_info_plus: ^2.1.2
   scrollable_positioned_list: ^0.2.3
-  flutter_smart_dialog: ^3.3.1
+  flutter_smart_dialog: ^3.4.1 #flutter_smart_dialog: ^3.3.1
   modal_bottom_sheet: ^2.0.1
   webview_flutter: ^3.0.0
   event_bus: ^2.0.0
@@ -72,6 +72,8 @@ dependencies:
 
   stacked_listview: ^1.0.3+2
   flip_card: ^0.6.0
+
+  image_gallery_saver: ^1.6.8
 
 dev_dependencies:
   flutter_test:
