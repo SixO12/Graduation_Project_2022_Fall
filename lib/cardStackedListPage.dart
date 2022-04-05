@@ -16,7 +16,7 @@ class _CardStackedListPageState extends State<CardStackedListPage> {
 
   int _index = 0;
   bool _click = false;
-  var colors = [Colors.red, Colors.green, Colors.blue, Colors.orangeAccent];
+  var colors = [Colors.green, Colors.black, Colors.blue, Colors.red];
   String _needName = "";
 
   String _imageUrl = "assets/foodwaste.png";
