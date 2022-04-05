@@ -225,7 +225,7 @@ class _CardStackedListPageState extends State<CardStackedListPage> {
                                                   const Icon(Icons.close,color: Colors.transparent,size: 30,),
                                                   Expanded(
                                                     child: Container(
-                                                      child: const Text("图片分享保存",style: TextStyle(fontSize: 16,color: Colors.white,fontWeight: FontWeight.w600),),
+                                                      child: const Text("Photo Sharing and Saving",style: TextStyle(fontSize: 16,color: Colors.white,fontWeight: FontWeight.w600),),
                                                       alignment: Alignment.center,
                                                     ),
                                                   ),
