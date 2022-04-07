@@ -40,6 +40,11 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
+    
+    aaptOptions {
+        noCompress "tflite" 
+    }
+    
 
     buildTypes {
         release {
