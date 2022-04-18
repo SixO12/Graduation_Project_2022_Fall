@@ -32,15 +32,15 @@ class _CameraComponentState extends State<CameraComponent>
   var running = false;
   var camSize = 50.0;
   Widget im;
-  var results = ['paper', 'cardboard', 'glass', 'plastic', 'metal', 'trash'];
+  var results = ['cardboard', 'glass', 'metal', 'paper', 'plastic', 'trash'];
 
 
   final Map _translate = {//metal，plastic，paper，cardboard，trash,glass
+    "cardboard" : "cardboard",
     "glass" : "glass",
     "metal" : "metal",
-    "plastic" : "plastic",
     "paper" : "paper",
-    "cardboard" : "cardboard",
+    "plastic" : "plastic",
     "trash" : "trash",
   };
 
